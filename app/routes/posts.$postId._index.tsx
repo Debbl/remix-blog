@@ -1,7 +1,8 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { prisma } from "~/prisma.server";
 import ReactMarkdown from "react-markdown";
+import { prisma } from "~/prisma.server";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
 export async function loader(c: LoaderFunctionArgs) {
   const postId = c.params.postId as string;

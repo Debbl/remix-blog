@@ -1,8 +1,8 @@
 import { createCookieSessionStorage } from "@remix-run/node";
 
-export type UserSessionData = {
+export interface UserSessionData {
   username: string;
-};
+}
 
 export const userSessionStorage = createCookieSessionStorage<UserSessionData>({
   cookie: {
@@ -12,6 +12,7 @@ export const userSessionStorage = createCookieSessionStorage<UserSessionData>({
     path: "/",
     sameSite: "lax",
     // 加密密钥
+    // eslint-disable-next-line n/prefer-global/process
     secrets: [process.env.SESSION_SECRET as string],
     secure: true,
   },
@@ -19,7 +20,7 @@ export const userSessionStorage = createCookieSessionStorage<UserSessionData>({
 
 export const auth = async (request: Request) => {
   const session = await userSessionStorage.getSession(
-    request.headers.get("Cookie")
+    request.headers.get("Cookie"),
   );
 
   return {

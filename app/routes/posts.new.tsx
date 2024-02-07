@@ -1,7 +1,8 @@
 import { Button, Input, Textarea } from "@nextui-org/react";
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { prisma } from "~/prisma.server";
+import type { ActionFunctionArgs } from "@remix-run/node";
 
 export async function action(c: ActionFunctionArgs) {
   const formData = await c.request.formData();
@@ -63,7 +64,7 @@ export default function Page() {
           />
 
           <Button
-            isLoading={navigation.state === 'submitting'}
+            isLoading={navigation.state === "submitting"}
             type="submit"
             color="primary"
           >

@@ -1,6 +1,4 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import mainCSS from "./main.css";
-import type { LinksFunction } from "@remix-run/node";
 import { NextUIProvider } from "@nextui-org/react";
 import {
   Links,
@@ -10,6 +8,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import mainCSS from "./main.css";
+import type { LinksFunction } from "@remix-run/node";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: mainCSS },

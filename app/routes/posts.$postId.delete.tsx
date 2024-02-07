@@ -1,18 +1,8 @@
 import { Button, Input, Textarea } from "@nextui-org/react";
-import {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  json,
-  redirect,
-} from "@remix-run/node";
-import {
-  Form,
-  useActionData,
-  useFetcher,
-  useLoaderData,
-  useNavigation,
-} from "@remix-run/react";
+import { json, redirect } from "@remix-run/node";
+import { Form, useFetcher, useLoaderData } from "@remix-run/react";
 import { prisma } from "~/prisma.server";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 
 export async function loader(c: LoaderFunctionArgs) {
   const postId = c.params.postId as string;
@@ -47,7 +37,6 @@ export async function action(c: ActionFunctionArgs) {
 
 export default function Page() {
   const loaderData = useLoaderData<typeof loader>();
-  const navigation = useNavigation();
 
   const deleteFetcher = useFetcher();
 
@@ -80,13 +69,13 @@ export default function Page() {
             <Button
               isLoading={isDeleting}
               color="danger"
-              onClick={_ => {
-                console.log(confirm("确认删除吗？"));
-                if(confirm("确认删除吗？")) {
+              onClick={(_) => {
+                // eslint-disable-next-line no-alert
+                if (confirm("确认删除吗？")) {
                   deleteFetcher.submit(null, {
                     method: "POST",
-                    action: `/posts/${loaderData.post.id}/delete`
-                  })
+                    action: `/posts/${loaderData.post.id}/delete`,
+                  });
                 }
               }}
             >

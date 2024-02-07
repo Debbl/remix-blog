@@ -1,10 +1,5 @@
 import { Button, Input, Textarea } from "@nextui-org/react";
-import {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  json,
-  redirect,
-} from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -15,6 +10,7 @@ import {
 } from "@remix-run/react";
 import { prisma } from "~/prisma.server";
 import { auth } from "./session.server";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 
 export async function loader(c: LoaderFunctionArgs) {
   const user = await auth(c.request);
@@ -144,6 +140,7 @@ export default function Page() {
             isLoading={isDeleting}
             color="danger"
             onClick={(_) => {
+              // eslint-disable-next-line no-alert
               if (confirm("确认删除吗？")) {
                 const formData = new FormData();
                 formData.set("action", "delete");

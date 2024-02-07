@@ -1,7 +1,8 @@
 import { Button, Input } from "@nextui-org/react";
-import { ActionFunction, ActionFunctionArgs, redirect } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { prisma } from "~/prisma.server";
+import type { ActionFunctionArgs } from "@remix-run/node";
 
 export async function action(c: ActionFunctionArgs) {
   const formData = await c.request.formData();
@@ -32,7 +33,7 @@ export async function action(c: ActionFunctionArgs) {
 export default function Page() {
   return (
     <Form method="POST">
-      <div className="p-12 flex flex-col gap-3">
+      <div className="flex flex-col gap-3 p-12">
         <Input label="用户名" name="username" />
         <Input type="password" label="密码" name="password" />
         <Button type="submit" color="primary">
